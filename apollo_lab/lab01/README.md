@@ -3,6 +3,8 @@
 
 ### 一、实验步骤
 
+apollo version：v1.4.0
+
 #### 1. 下载Quick Start安装包
 
 下载[apollo-build-scripts](https://github.com/nobodyiam/apollo-build-scripts)项目
