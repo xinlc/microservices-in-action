@@ -79,7 +79,30 @@ Staffjoy 教学版所采用的技术栈都是目前行业主流，数量不多�
 
 Staffjoy 教学版依赖一些私密配置，例如 sentry-dsn 和 aliyun-access-key 等等，这些私密配置不能 checkin 到 github 上，所以采用了 Spring 的一种私密配置机制，私密数据集中配置在**config/application.yml**中，这个文件在 gitignore 中，不会被 checkin 到 github。请参考 config 目录中的[application.yml.example](config/application.yml.example)文件和格式，在 config 目录中添加一个**appliction.yml**文件，其中填写你自己的私密配置。如果你暂时没有这些配置，可以暂时用假数据，直接把 application.yml.example，改为 application.yml，这样应用可以运行起来。注意，如果 aliyun 相关配置不配，则无法发送邮件或短信，sentry 相关配置不配则无法发送异常数据到 sentry，intercom 不配则不能对接 intercom 客服系统，recaptcha 暂未用可以不配。
 
+**在根目录的config文件下的配置spring boot会认为是公共的配置[Externalized Configuration](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html)**
+
 **关于如何运行的进一步内容，请参考极客时间的视频课程，课程里头有step by step演示**。
+
+1. 安装 switchhosts `brew cask install switchhosts`
+2. 下载 [skywalking](https://skywalking.apache.org/downloads/)
+3. 配置idea相关参数, run->edit configurations
+  - VM options: `-javaagent:/Users/leo/workspace/apache-skywalking-apm-bin/agent/skywalking-agent.jar`
+  - env vars: `SW_AGEMT_NAME=account-svc`
+4. 配置switchhosts 域名映射，参考faraday网关配置的host。
+```bash
+# My hosts
+127.0.0.1 account.staffjoy-v2.local
+127.0.0.1 faraday.staffjoy-v2.local
+127.0.0.1 myaccount.staffjoy-v2.local
+127.0.0.1 whoami.staffjoy-v2.local
+127.0.0.1 www.staffjoy-v2.local
+127.0.0.1 ical.staffjoy-v2.local
+127.0.0.1 staffjoy-v2.local
+127.0.0.1 app.staffjoy-v2.local
+127.0.0.1 company.staffjoy-v2.local
+```
+
+![deploy idea](doc/images/deploy-idea.jpg)
 
 ### 注意!!!
 
